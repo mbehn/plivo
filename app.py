@@ -43,9 +43,8 @@ def getmessages():
         try:
             data = request.args
             messages = client.messages.list(message_time__gt=str(data['from_date']) + " 00:00", message_time__lt=str(data['to_date']) + " 23:59", offset=int(data['page']) * 20, limit=20)
-            print(int(data['page']) * 20)
             total_message_count = messages.meta.total_count
-            page_count = math.ceil(total_message_count/20)        
-            return render_template('message_list.html', data=data, messages=messages, from_date=data['from_date'], to_date=data['to_date'], total_message_count=total_message_count, page_count=page_count)
+            page_count = math.ceil(total_message_count/20)    
+            return render_template('message_list.html', data=data, messages=messages, from_date=data['from_date'], to_date=data['to_date'], total_message_count=total_message_count, page_count=page_count, page_number=data['page'])
         except:
             return render_template('message_list.html')
