@@ -1,0 +1,19 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+</html>
+<body>
+    {% if data %}
+   <h1>
+       {% if data['message_uuid'] %}
+       <h3>Your message was successfully sent</h3>
+       <p>Message ID: {{ data['message_uuid'][0] }}</p>
+       {% else %}
+       <h3>Your message was not sent</h3>
+       {% endif %}
+   </h1>
+   {% endif %}
+   
+   <a href={{ url_for('getmessages')}}>View previous messages</a>
+</body>

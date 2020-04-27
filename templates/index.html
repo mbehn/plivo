@@ -1,0 +1,40 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="static/style.css">
+        <title>Plivo Messenger Application - Matt Behn</title>
+    </head>
+    <body>
+        <div class="container">
+            <div class="header">
+                <h1>Plivo API Demo App</h1>
+                <h2>Matt Behn</h2>
+            </div>
+            <div class="form-container">
+                {% if data %}
+                <p style="text-align: center; color: green; background-color: yellow">Your message was successfully sent with message id {{data}}.</p>
+                {% endif %}
+                <div class="instructions">
+                    <p>To send a text message to someone, enter a phone number and message below and click "send text".</p>                    
+                </div>
+                <form method="POST" action="/sendmessage">
+                    <div class="form-field">
+                        <div class="label-container">
+                            <label for="phone-number">Phone Number: </label>
+                        </div>                        
+                        <input name="phone" type="tel" id="phone-number" required>
+                    </div>
+                    <div class="form-field">
+                        <div class="label-container">
+                            <label for="message">Message: </label>
+                        </div>
+                        <textarea name="message" rows="5" id="message" required></textarea>
+                    </div>
+                    <div class="form-field">
+                        <button type="submit">send text</button>
+                    </div>                    
+                </form>
+                <p style="text-align:center"><a href="{{url_for('getmessages')}}">Message Log</a></p>
+            </div>
+        </div>
+    </body>
+</html>

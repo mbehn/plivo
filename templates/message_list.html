@@ -1,0 +1,75 @@
+<html>
+    <head>
+        <link rel="stylesheet" href="static/style.css">
+    </head>
+<body>
+    <div class="container">
+        <div class="messages">
+            <div class="form-container-get-messages">
+                <p style="text-align: center;">List messages by date range.</p>
+                <p style="text-align: center;"><a href="{{url_for('index')}}">Send a message</a></p>
+                <form method="POST" action="/getmessages">
+                    <div class="form-field">
+                        <div class="label-container">
+                            <label for="from-date">Start Date: </label>
+                        </div>                        
+                        <input name="from-date" type="date" id="from-date" required>
+                    </div> 
+                    <div class="form-field">
+                        <div class="label-container">
+                            <label for="to-date">End Date: </label>
+                        </div>                        
+                        <input name="to-date" type="date" id="to-date" required>
+                    </div>
+                    <div class="form-field">
+                        <button type="submit">Get Messages</button>
+                    </div>                        
+                </form>
+                <div class="messages">
+                    {% if messages %}
+                    <div class="date-range">
+                        <div class="date">
+                            Messages sent from {{from_date}} 00:00
+                        </div>
+                        <div class="date">
+                            to {{to_date}} 23:59
+                        </div>
+                    </div>
+                    <div class="message-count">
+                        <b>Total Messages: </b> {{total_message_count}}
+                    </div>
+                    {% for message in messages %}
+                    <div class="message">
+                        <ul>
+                            <li><span class="message-label">Message UUID: {{message.message_uuid}}</li></span>
+                            <li><span class="message-label">From: {{message.from_number}}</li></span>
+                            <li><span class="message-label">To: {{message.to_number}}</li></span>
+                            <li><span class="message-label">Message Time: {{message.message_time}}</li></span>
+                            <li><span class="message-label">Status: {{message.message_state}}</li></span>
+                        </ul>
+                    </div>
+                    {% endfor %}
+                    {% endif %}
+                    <div id="pagination">
+
+                    </div>               
+                </div>
+            </div>
+        </div>
+    </div>
+ <input id="page_count" name="page_count" type="hidden" value="{{page_count}}">
+
+ <script>
+    var page_count = document.getElementById('page_count').value;
+    var paginationElement = document.getElementById('pagination');
+    var index = 0;
+    while (index < page_count) {
+        let link = document.createElement('a')
+        link.href = '/getmessages?from_date={{from_date}}&to_date={{to_date}}&page=' + index.toString()
+        link.text = index + 1
+        paginationElement.append(link)
+        index++
+    }
+ </script>
+</body>
+</html>
