@@ -1,4 +1,4 @@
-# Plivo Messagin API Demo
+# Plivo Messaging API Demo
 ## System Requirements
 - Python 3 + pip
 - An internet browser to view the application
