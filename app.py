@@ -31,14 +31,8 @@ def sendmessage():
         return redirect(url_for('index', data=message_created.message_uuid))
     return render_template('sendmessage.html', data=message_created)
 
-@app.route('/getmessages', methods=['POST','GET'])
+@app.route('/getmessages', methods=['GET'])
 def getmessages():
-    if request.method == 'POST':
-        data = request.form
-        messages = client.messages.list(message_time__gte=str(data['from-date']) + " 00:00", message_time__lte=str(data['to-date']) + " 23:59", limit=20)
-        total_message_count = messages.meta.total_count
-        page_count = math.ceil(total_message_count/20)
-        return render_template('message_list.html', data=data, messages=messages, from_date=data['from-date'], to_date=data['to-date'], total_message_count=total_message_count, page_count=page_count)
     if request.method == 'GET':
         try:
             data = request.args
