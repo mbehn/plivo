@@ -13,13 +13,13 @@
                         <div class="label-container">
                             <label for="from-date">Start Date: </label>
                         </div>                        
-                        <input name="from_date" type="date" id="from-date" required>
+                        <input name="from_date" type="date" id="from-date" {% if from_date %}value={{from_date}} {% endif %} required>
                     </div> 
                     <div class="form-field">
                         <div class="label-container">
                             <label for="to-date">End Date: </label>
                         </div>                        
-                        <input name="to_date" type="date" id="to-date" required>
+                        <input name="to_date" type="date" id="to-date" {% if to_date %}value={{to_date}} {% endif %} required>
                     </div>
                     <input type="hidden" name="page" value="0">
                     <div class="form-field">
